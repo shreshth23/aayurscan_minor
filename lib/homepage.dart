@@ -1,0 +1,79 @@
+import 'package:aayurscan_minor/screens/scanner.dart';
+import 'package:aayurscan_minor/screens/search.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key, required this.screenData});
+  final int screenData;
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late int screen;
+  bool forFirst = true;
+  List<Widget> screenList = const [
+    SearchPlant(),
+    ScannerPage(),
+    ScannerPage(),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: SafeArea(
+          child: Stack(
+            children: [
+              forFirst ? screenList[widget.screenData] : screenList[screen],
+              Container(
+                  color: Colors.black54,
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          child: Image.asset(
+                            "assets/images/icon.jpg",
+                            width: 50,
+                            height: 50,
+                          ),
+                        ),
+                        Text(
+                          "AayurScan",
+                          style: GoogleFonts.pacifico(
+                              color: Colors.white,
+                              fontSize: 32,
+                              fontWeight: FontWeight.normal),
+                        )
+                      ],
+                    ),
+                  ))
+            ],
+          ),
+        ),
+        backgroundColor: const Color(0xff2D481D),
+        bottomNavigationBar: CurvedNavigationBar(
+          index: widget.screenData,
+          animationCurve: Curves.easeInOut,
+          animationDuration: const Duration(milliseconds: 300),
+          backgroundColor: const Color(0xff2D481D),
+          items: const [
+            Icon(Icons.search),
+            Icon(Icons.home),
+            Icon(Icons.history),
+          ],
+          onTap: (value) {
+            setState(() {
+              forFirst = false;
+              screen = value;
+            });
+          },
+        ),
+      ),
+    );
+  }
+}
