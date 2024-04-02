@@ -15,7 +15,7 @@ class _SearchPlantState extends State<SearchPlant> {
       backgroundColor: Color(0xff2D481D),
       body: Column(
         children: [
-          Result(),
+
         ],
       ),
     );

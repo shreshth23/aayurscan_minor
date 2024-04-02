@@ -1,4 +1,4 @@
-import 'package:aayurscan_minor/screens/scanner.dart';
+import 'package:aayurscan_minor/screens/ScannerPage/_scanner.dart';
 import 'package:aayurscan_minor/screens/search.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
