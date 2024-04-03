@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:aayurscan_minor/screens/ScannerPage/_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:aayurscan_minor/homepage.dart';
 import 'package:aayurscan_minor/screens/result.dart';
@@ -11,7 +12,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 class Scanner extends StatefulWidget {
-  const Scanner({super.key});
+  Scanner({super.key});
 
   @override
   State<Scanner> createState() => _ScannerState();
@@ -38,7 +39,7 @@ class _ScannerState extends State<Scanner> {
 
   Future<void> uploadImage(File imageFile) async {
     // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
-    var request = http.MultipartRequest('POST', Uri.parse('http://192.168.1.2:3000/predict'));
+    var request = http.MultipartRequest('POST', Uri.parse('http://192.168.18.219:3000/predict'));
 
     // Attach the image file to the request
     var image = await http.MultipartFile.fromPath('file', imageFile.path);
@@ -206,16 +207,16 @@ class _ScannerState extends State<Scanner> {
                               });
                           return;
                         }
+                        uploadImage(File(imagePath));
                         Timer(const Duration(seconds: 3), () {
                           setState(() {
                             loader=false;
                           });
-                          uploadImage(File(imagePath));
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Result(plant: predictedData,)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage(screenData: 1, body: Result(plant: ""))));
                         });
-                        setState(() {
-                          loader = true;
-                        });
+                        // setState(() {
+                        //   loader = true;
+                        // });
                       },
                       icon: const Icon(
                         Icons.arrow_right,

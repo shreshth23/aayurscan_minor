@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.screenData});
+  const HomePage({super.key, required this.screenData, required this.body});
+  final Widget body;
   final int screenData;
   @override
   State<HomePage> createState() => _HomePageState();
@@ -14,11 +15,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late int screen;
   bool forFirst = true;
-  List<Widget> screenList = const [
-    SearchPlant(),
-    ScannerPage(),
-    ScannerPage(),
-  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -26,7 +22,7 @@ class _HomePageState extends State<HomePage> {
         body: SafeArea(
           child: Stack(
             children: [
-              forFirst ? screenList[widget.screenData] : screenList[screen],
+              widget.body,
               Container(
                   color: Colors.black54,
                   child: Container(

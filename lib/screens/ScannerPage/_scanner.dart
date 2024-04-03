@@ -9,7 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ScannerPage extends StatefulWidget {
-  const ScannerPage({super.key});
+  const ScannerPage({super.key,});
 
   @override
   State<ScannerPage> createState() => _ScannerPageState();

@@ -1,3 +1,4 @@
+import 'package:aayurscan_minor/screens/ScannerPage/_scanner.dart';
 import 'package:flutter/material.dart';
 import 'homepage.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        "/" : (context) => const HomePage(screenData: 1,),
+        "/" : (context) => const HomePage(screenData: 1, body: ScannerPage(),),
       },
     );
   }
