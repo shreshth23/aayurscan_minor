@@ -44,12 +44,12 @@ class _ResultState extends State<Result> {
                     color: Colors.white,
                   ),
                   child: ClipRRect(
-                    child: Image.network(
-                      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Tulsi_or_Tulasi_Holy_basil.jpg/330px-Tulsi_or_Tulasi_Holy_basil.jpg",
-                      width: 75,
-                      height: 75,
-                      fit: BoxFit.fill,
-                    ),
+                    // child: Image.network(
+                    //   "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Tulsi_or_Tulasi_Holy_basil.jpg/330px-Tulsi_or_Tulasi_Holy_basil.jpg",
+                    //   width: 75,
+                    //   height: 75,
+                    //   fit: BoxFit.fill,
+                    // ),
                     borderRadius: BorderRadius.all(Radius.circular(50)),
                   ),
                 ),
@@ -68,29 +68,29 @@ class _ResultState extends State<Result> {
                 SizedBox(
                   height: 5,
                 ),
-                Container(
-                  child: Text(
-                    "Scintific name : Ocimum tenuiflorum",
-                    style: GoogleFonts.abel(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
+                // Container(
+                //   child: Text(
+                //     "Scintific name : Ocimum tenuiflorum",
+                //     style: GoogleFonts.abel(
+                //       color: Colors.white,
+                //       fontSize: 16,
+                //       fontWeight: FontWeight.w400,
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
                   height: 5,
                 ),
-                Container(
-                  child: Text(
-                    "Family :	Lamiaceae",
-                    style: GoogleFonts.abel(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w200,
-                    ),
-                  ),
-                )
+                // Container(
+                //   child: Text(
+                //     "Family :	Lamiaceae",
+                //     style: GoogleFonts.abel(
+                //       color: Colors.white,
+                //       fontSize: 16,
+                //       fontWeight: FontWeight.w200,
+                //     ),
+                //   ),
+                // )
               ],
             ),
           ),

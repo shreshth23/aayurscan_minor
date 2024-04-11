@@ -52,7 +52,9 @@ class _ScannerState extends State<Scanner> {
     if (streamedResponse.statusCode == 200) {
       var responseData = json.decode(await streamedResponse.stream.transform(utf8.decoder).join());
       print('Response body: ${responseData['predictions']}');
-      predictedData = responseData['predictions'];
+      setState(() {
+        predictedData = responseData['predictions'];
+      });
       print('Image uploaded successfully');
     } else {
       print('Failed to upload image: ${streamedResponse.reasonPhrase}');
@@ -212,7 +214,7 @@ class _ScannerState extends State<Scanner> {
                           setState(() {
                             loader=false;
                           });
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage(screenData: 1, body: Result(plant: ""))));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage(screenData: 1, body: Result(plant: predictedData))));
                         });
                         // setState(() {
                         //   loader = true;
