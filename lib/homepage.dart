@@ -1,7 +1,9 @@
+import 'package:aayurscan_minor/screens/Home/home.dart';
 import 'package:aayurscan_minor/screens/ScannerPage/_scanner.dart';
 import 'package:aayurscan_minor/screens/search.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
@@ -57,10 +59,25 @@ class _HomePageState extends State<HomePage> {
           animationCurve: Curves.easeInOut,
           animationDuration: const Duration(milliseconds: 300),
           backgroundColor: const Color(0xff2D481D),
-          items: const [
-            Icon(Icons.search),
-            Icon(Icons.home),
-            Icon(Icons.history),
+          items: [
+            GestureDetector(
+                onTap: (){
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomePage(screenData: 0, body: Home())));
+                },
+                child: Icon(Icons.home,)
+            ),
+            GestureDetector(
+                onTap: (){
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomePage(screenData: 1, body: ScannerPage())));
+                },
+                child: Icon(Icons.search,)
+            ),
+            GestureDetector(
+                onTap: (){
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomePage(screenData: 2, body: Home())));
+                },
+                child: Icon(Icons.history,)
+            ),
           ],
           onTap: (value) {
             setState(() {
