@@ -94,32 +94,7 @@ class _HomePageState extends State<HomePage> {
                 child: Icon(
                   Icons.history,
                 )),
-          items: [
-            GestureDetector(
-                onTap: (){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomePage(screenData: 0, body: Home())));
-                },
-                child: Icon(Icons.home,)
-            ),
-            GestureDetector(
-                onTap: (){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomePage(screenData: 1, body: ScannerPage())));
-                },
-                child: Icon(Icons.search,)
-            ),
-            GestureDetector(
-                onTap: (){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomePage(screenData: 2, body: Home())));
-                },
-                child: Icon(Icons.history,)
-            ),
-          ],
-          onTap: (value) {
-            setState(() {
-              forFirst = false;
-              screen = value;
-            });
-          },
+          ]
         ),
       ),
     );
