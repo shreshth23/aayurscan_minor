@@ -1,15 +1,19 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HistoryDatabase {
-  List plant = [];
+  List plant = [
+    ['Tulsi'],
+    ['Awala'],
+    ['Neem'],
+  ];
 
   final _mybox = Hive.box('mybox');
 
   void initialContent() {
     plant = [
-      {'Ocimum tenuiflorum', 'Tulsi'},
-      {'Phyllanthus emblica', 'Awala'},
-      {'Azadirachta indica', 'Neem'},
+      // ['Ocimum tenuiflorum', 'Tulsi'],
+      // ['Phyllanthus emblica', 'Awala'],
+      // ['Azadirachta indica', 'Neem'],
     ];
   }
 

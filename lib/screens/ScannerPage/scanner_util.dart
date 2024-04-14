@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:aayurscan_minor/database/historydatabase.dart';
 import 'package:aayurscan_minor/screens/ScannerPage/_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:aayurscan_minor/homepage.dart';
@@ -19,7 +20,8 @@ class Scanner extends StatefulWidget {
 }
 
 class _ScannerState extends State<Scanner> {
-  String predictedData='';
+  HistoryDatabase db = HistoryDatabase();
+  String predictedData = '';
   bool loader = false;
 
   late String imagePath;
@@ -39,7 +41,8 @@ class _ScannerState extends State<Scanner> {
 
   Future<void> uploadImage(File imageFile) async {
     // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
-    var request = http.MultipartRequest('POST', Uri.parse('http://192.168.18.219:3000/predict'));
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://192.168.18.219:3000/predict'));
 
     // Attach the image file to the request
     var image = await http.MultipartFile.fromPath('file', imageFile.path);
@@ -50,15 +53,18 @@ class _ScannerState extends State<Scanner> {
 
     // Handle the response
     if (streamedResponse.statusCode == 200) {
-      var responseData = json.decode(await streamedResponse.stream.transform(utf8.decoder).join());
+      var responseData = json
+          .decode(await streamedResponse.stream.transform(utf8.decoder).join());
       print('Response body: ${responseData['predictions']}');
       setState(() {
         predictedData = responseData['predictions'];
+        db.plant.add(predictedData);
       });
       print('Image uploaded successfully');
     } else {
       print('Failed to upload image: ${streamedResponse.reasonPhrase}');
     }
+    db.updateDatabase();
   }
 
   @override
@@ -77,8 +83,7 @@ class _ScannerState extends State<Scanner> {
             Container(
               width: 280,
               height: 650,
-              margin:
-              EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
+              margin: EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
               decoration: const BoxDecoration(
                   color: Color.fromRGBO(0, 0, 0, 0.2),
                   borderRadius: BorderRadius.all(Radius.circular(50))),
@@ -86,52 +91,51 @@ class _ScannerState extends State<Scanner> {
             Container(
               child: imgSelected
                   ? Container(
-
-                margin: EdgeInsets.only(top: 100),
-                alignment: Alignment.topCenter,
-                child: ClipRRect(
-                  child: Image.file(
-                    File(imagePath),
-                    height: 180,
-                    width: 180,
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(100)),
-                ),
-              )
-                  : Stack(
-                children: [
-                  Container(
-                    alignment: Alignment.topCenter,
-                    margin: EdgeInsets.only(top: 100),
-                    child: ClipRRect(
-                      borderRadius:
-                      BorderRadius.all(Radius.circular(100)),
-                      child: Image.asset(
-                        "assets/images/scanning.gif",
-                        width: 180,
-                        height: 180,
-                        fit: BoxFit.cover,
+                      margin: EdgeInsets.only(top: 100),
+                      alignment: Alignment.topCenter,
+                      child: ClipRRect(
+                        child: Image.file(
+                          File(imagePath),
+                          height: 180,
+                          width: 180,
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(100)),
                       ),
+                    )
+                  : Stack(
+                      children: [
+                        Container(
+                          alignment: Alignment.topCenter,
+                          margin: EdgeInsets.only(top: 100),
+                          child: ClipRRect(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(100)),
+                            child: Image.asset(
+                              "assets/images/scanning.gif",
+                              width: 180,
+                              height: 180,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 70),
+                          width: 360,
+                          height: 24,
+                          alignment: Alignment.center,
+                          decoration: const BoxDecoration(
+                              color: Color.fromRGBO(0, 0, 0, 0.8)),
+                          child: Text(
+                            "Scan or upload an image",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.abhayaLibre(
+                                fontSize: 16, color: Colors.white),
+                          ),
+                        )
+                      ],
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 15, vertical: 70),
-                    width: 360,
-                    height: 24,
-                    alignment: Alignment.center,
-                    decoration: const BoxDecoration(
-                        color: Color.fromRGBO(0, 0, 0, 0.8)),
-                    child: Text(
-                      "Scan or upload an image",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.abhayaLibre(
-                          fontSize: 16, color: Colors.white),
-                    ),
-                  )
-                ],
-              ),
               margin: EdgeInsets.only(top: 110, right: 58, left: 58),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -160,8 +164,7 @@ class _ScannerState extends State<Scanner> {
                     decoration: BoxDecoration(
                         color: Color.fromARGB(255, 45, 90, 51),
                         border: Border.all(color: Colors.black12, width: 2),
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(50))),
+                        borderRadius: BorderRadius.all(Radius.circular(50))),
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 10),
@@ -177,8 +180,7 @@ class _ScannerState extends State<Scanner> {
                     ),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.black12, width: 2),
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(50))),
+                        borderRadius: BorderRadius.all(Radius.circular(50))),
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 10),
@@ -203,8 +205,7 @@ class _ScannerState extends State<Scanner> {
                                   //   style: GoogleFonts.pacifico(fontSize: 32),
                                   // ),
                                   contentPadding: const EdgeInsets.all(20),
-                                  content:
-                                  const Text("Image not selected !"),
+                                  content: const Text("Image not selected !"),
                                 );
                               });
                           return;
@@ -212,9 +213,14 @@ class _ScannerState extends State<Scanner> {
                         uploadImage(File(imagePath));
                         Timer(const Duration(seconds: 3), () {
                           setState(() {
-                            loader=false;
+                            loader = false;
                           });
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage(screenData: 1, body: Result(plant: predictedData))));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage(
+                                      screenData: 1,
+                                      body: Result(plant: predictedData))));
                         });
                         // setState(() {
                         //   loader = true;
@@ -229,8 +235,7 @@ class _ScannerState extends State<Scanner> {
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.black12, width: 2),
                         color: Color.fromARGB(255, 45, 90, 51),
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(50))),
+                        borderRadius: BorderRadius.all(Radius.circular(50))),
                   )
                 ],
               ),
@@ -248,20 +253,19 @@ class _ScannerState extends State<Scanner> {
             ),
             loader
                 ? Container(
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(100)),
-                child: Image.asset(
-                  "assets/images/loader.gif",
-                  width: 100,
-                  height: 100,
-                ),
-              ),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius:
-                  BorderRadius.all(Radius.circular(100))),
-            )
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(100)),
+                      child: Image.asset(
+                        "assets/images/loader.gif",
+                        width: 100,
+                        height: 100,
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(100))),
+                  )
                 : SizedBox()
           ],
         ),

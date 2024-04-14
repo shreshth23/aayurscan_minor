@@ -2,13 +2,11 @@ import "package:flutter/material.dart";
 import "package:flutter_slidable/flutter_slidable.dart";
 
 class PlantHistory extends StatelessWidget {
-  final scientificname;
   final commonname;
   // Function(bool?)? onChanged;
   Function(BuildContext)? deleteFunction;
   PlantHistory({
     super.key,
-    required this.scientificname,
     required this.commonname,
     // required this.onChanged,
     required this.deleteFunction,
@@ -32,26 +30,22 @@ class PlantHistory extends StatelessWidget {
         ),
         child: Container(
           padding: EdgeInsets.all(16),
-          child: Row(
+          child: Column(
             children: [
               Column(
                 children: [
-                  // Checkbox(value: taskCompleted, onChanged: onChanged),
                   Text(
-                    scientificname,
-                    //   style: TextStyle(
-                    //       decoration: taskCompleted
-                    //           ? TextDecoration.lineThrough
-                    //           : TextDecoration.none),
+                    commonname,
+                    style: TextStyle(color: Colors.white),
+                    // textAlign: TextAlign.left,
                   ),
-                  Text(commonname),
                 ],
               ),
             ],
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Colors.yellow,
+            color: Color(0xff233610),
           ),
         ),
       ),
