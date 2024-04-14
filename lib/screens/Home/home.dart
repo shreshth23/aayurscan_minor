@@ -14,7 +14,8 @@ class _HomeState extends State<Home> {
       backgroundColor: Color(0xff2D481D),
       body: Center(
         child: Container(
-          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.1),
+          margin:
+              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
           width: MediaQuery.of(context).size.width,
           child: Column(
@@ -22,21 +23,36 @@ class _HomeState extends State<Home> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Card(label: "Search", widget: Icons.search,),
-                  Card(label: "PlantPlay", widget: Icons.book,)
+                  Card(
+                    label: "Search",
+                    widget: Icons.search,
+                  ),
+                  Card(
+                    label: "PlantPlay",
+                    widget: Icons.book,
+                  )
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Card(label: "FloraSpot", widget: Icons.map,),
-                  Card(label: "FloraForum", widget: Icons.people,)
+                  Card(
+                    label: "FloraSpot",
+                    widget: Icons.map,
+                  ),
+                  Card(
+                    label: "FloraForum",
+                    widget: Icons.people,
+                  )
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Card(label: "Settings", widget: Icons.settings,),
+                  Card(
+                    label: "Settings",
+                    widget: Icons.settings,
+                  ),
                 ],
               ),
             ],
@@ -65,26 +81,25 @@ class _CardState extends State<Card> {
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.symmetric(vertical: 30),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: Color(0xff233610)
-      ),
+          borderRadius: BorderRadius.circular(5), color: Color(0xff233610)),
       child: Column(
         children: [
           Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(50)),
-              color: Colors.white
-            ),
-            child: Icon(widget.widget,
+                borderRadius: BorderRadius.all(Radius.circular(50)),
+                color: Colors.white),
+            child: Icon(
+              widget.widget,
               size: 35,
             ),
           ),
-          SizedBox(height: 4,),
-          Text( widget.label,
-            style: TextStyle(
-              color: Colors.white
-            ),
+          SizedBox(
+            height: 4,
+          ),
+          Text(
+            widget.label,
+            style: TextStyle(color: Colors.white),
           )
         ],
       ),
