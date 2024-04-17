@@ -26,19 +26,22 @@ class _HistoryState extends State<History> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xff2D481D),
-        body: ListView.builder(
-            itemCount: db.plant.length,
-            itemBuilder: (context, index) {
-              // if (index <= db.plant.length) {
+        body: Container(
+          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.1),
+          child: ListView.builder(
+              itemCount: db.plant.length,
+              itemBuilder: (context, index) {
+                // if (index <= db.plant.length) {
 
-              return PlantHistory(
-                scientificname: db.plant[index][0],
-                commonname: db.plant[index][1],
-                deleteFunction: (context) => deleteTask(index),
-              );
-              // } else {
-              //   return SizedBox();
-              // }
-            }));
+                return PlantHistory(
+                  scientificname: db.plant[index][0],
+                  commonname: db.plant[index][1],
+                  deleteFunction: (context) => deleteTask(index),
+                );
+                // } else {
+                //   return SizedBox();
+                // }
+              }),
+        ));
   }
 }

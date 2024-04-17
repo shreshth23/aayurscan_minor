@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:aayurscan_minor/database/historydatabase.dart';
 import 'package:aayurscan_minor/screens/ScannerPage/_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:aayurscan_minor/homepage.dart';
@@ -19,6 +20,7 @@ class Scanner extends StatefulWidget {
 }
 
 class _ScannerState extends State<Scanner> {
+  HistoryDatabase db = HistoryDatabase();
   String predictedData='';
   bool loader = false;
 
@@ -39,7 +41,7 @@ class _ScannerState extends State<Scanner> {
 
   Future<void> uploadImage(File imageFile) async {
     // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
-    var request = http.MultipartRequest('POST', Uri.parse('http://192.168.18.219:3000/predict'));
+    var request = http.MultipartRequest('POST', Uri.parse('http://192.168.159.219:3000/predict'));
 
     // Attach the image file to the request
     var image = await http.MultipartFile.fromPath('file', imageFile.path);
@@ -54,7 +56,9 @@ class _ScannerState extends State<Scanner> {
       print('Response body: ${responseData['predictions']}');
       setState(() {
         predictedData = responseData['predictions'];
+        db.plant.add([predictedData,'']);
       });
+      db.updateDatabase();
       print('Image uploaded successfully');
     } else {
       print('Failed to upload image: ${streamedResponse.reasonPhrase}');
