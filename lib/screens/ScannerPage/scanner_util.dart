@@ -42,7 +42,7 @@ class _ScannerState extends State<Scanner> {
   Future<void> uploadImage(File imageFile) async {
     // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
     var request = http.MultipartRequest(
-        'POST', Uri.parse('http://192.168.18.219:3000/predict'));
+        'POST', Uri.parse('http://192.168.121.219:3000/predict'));
 
     // Attach the image file to the request
     var image = await http.MultipartFile.fromPath('file', imageFile.path);
@@ -58,7 +58,7 @@ class _ScannerState extends State<Scanner> {
       print('Response body: ${responseData['predictions']}');
       setState(() {
         predictedData = responseData['predictions'];
-        db.plant.add(predictedData);
+        db.plant.add([predictedData]);
       });
       print('Image uploaded successfully');
     } else {

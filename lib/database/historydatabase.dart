@@ -2,9 +2,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 class HistoryDatabase {
   List plant = [
-    ['Tulsi'],
-    ['Awala'],
-    ['Neem'],
+    //   ['Tulsi'],
+    //   ['Awala'],
+    //   ['Neem'],
   ];
 
   final _mybox = Hive.box('mybox');

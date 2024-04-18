@@ -43,6 +43,7 @@ class PlantHistory extends StatelessWidget {
               ),
             ],
           ),
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: Color(0xff233610),
